@@ -1,0 +1,5 @@
+s       selected        root://eoscms//eos/cms/store/group/alca_ecalcalib/ecalMIBI/amartell/MaterialBudget/MC_GEN-SIM-RECODEBUG/DYToEE_M_20_TuneZ2star_8TeV_pythia6_Summer12_DR53X-NominalGeo_PU_S10_START53_V15-v1_GEN-SIM-RECODEBUG.root
+d       selected        root://eoscms//eos/cms/store/group/alca_ecalcalib/ecalMIBI/amartell/MaterialBudget/DoubleElectron_Run2012ABCD-22Jan2013-v1_AOD/DoubleElectron_Run2012A-22Jan2013-v1_AOD.root
+d       selected        root://eoscms//eos/cms/store/group/alca_ecalcalib/ecalMIBI/amartell/MaterialBudget/DoubleElectron_Run2012ABCD-22Jan2013-v1_AOD/DoubleElectron_Run2012B-22Jan2013-v1_AOD.root
+d       selected        root://eoscms//eos/cms/store/group/alca_ecalcalib/ecalMIBI/amartell/MaterialBudget/DoubleElectron_Run2012ABCD-22Jan2013-v1_AOD/DoubleElectron_Run2012C-22Jan2013-v1_AOD.root
+d       selected        root://eoscms//eos/cms/store/group/alca_ecalcalib/ecalMIBI/amartell/MaterialBudget/DoubleElectron_Run2012ABCD-22Jan2013-v1_AOD/DoubleElectron_Run2012D-22Jan2013-v1_AOD.root

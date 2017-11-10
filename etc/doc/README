@@ -1,0 +1,174 @@
+##############################################################
+############ I Just AnalyZe Z (IJazZ) package ################
+###############  IJazZ brief Introduction ####################
+##############################################################
+
+### Overview
+1. Install & Compile
+2. Starting with IJazZ, a first example.
+3. IJazZ Output
+4. IJazZ Input
+5. Data and MC corrections
+##6. A more realistic example: Hgg resolution
+
+
+###  1. Install & compile
+cvs co UserCode/fcouderc/IJazZ -d IJazZ
+cd IJazZ
+source etc/scripts/setupIJazZ.sh
+make -j 4
+
+
+### 2. Starting with IJazZ
+#The exec is installed in:
+./bin/IJazZexe
+
+#to get a list of options:
+./bin/IJazZexe -h 
+
+# IJazZ takes as input a config file that passes to the exec the different inputs
+# The "Generic options" can be overide via on the command line
+# the main inputs are:
+# - input data files 
+# - input MC files
+# - axis definitions
+
+# "Generic options" can also be set inside the config file:
+# - on the command line: --<optName> val or --<optName> = val
+# - inside the config file: <optName> = val
+
+#2.1 a first example:
+# data
+./bin/IJazZexe etc/config/ijazzExample.conf  --doFit 1
+
+#MC
+./bin/IJazZexe etc/config/ijazzExample.conf  --doFit 1 --isMC
+
+#the config file etc/config/ijazzExample.conf uses as input an ecalelf format file:
+etc/data/Run2012ABC_AlphaRef.ecalelf
+# the option doFit = 1 tells IJazZ to do the Z fit (the option outputTree = 1 also dump a root tree, 
+# the tree can be produced also without doing the fit)
+
+#2.2 input format and important user access:
+#IJazZ uses is own format but all the interface with the user input/output are defined in the class:
+# IJazZdiEle which is defined in
+ls src/IJazZ_tupleVar.cc
+# the format of the output tree dumped by IJazZ is also setup in this class
+# therefore in principle this is the only class the user may have to use directly.
+
+
+### 3. IJazZ Output
+# 3.1 IJazZ fit results
+# when using IJazZ with option doFit = 1
+# the output of the fit is a txt files and root files that can is stored in the directory:
+../IJazZ/IJazZ_output/FitResults/<userDir>/<runRange>/IJazZ_EB_Data_<version>.root
+../IJazZ/IJazZ_output/FitResults/<userDir>/<runRange>/IJazZ_EB_Data_<version>.root.fittedResp
+../IJazZ/IJazZ_output/FitResults/<userDir>/<runRange>/IJazZ_EB_Data_<version>.root.fittedReso
+
+# <userDir> is tunable via option -u or --userDir  (with analysis type = 0, options: analysis=0, analysis = 1 is used only for etaScale)
+# <version> is set via -v or --version 
+# <runRange> is set via option -r or --runRange and should have the form  xxx-yyy
+
+# the root file contains only for now a canvas with a projection of the ND fit to check the fit convergence
+# the fittedResp file contains the fitted response (r) parameters   (r is defined as Ecor = E/r )
+# the fittedReso file contains the fitted resolution (s) parameters (s is defined as sigmaE / E )
+
+# 3.2 IJazZ fit results analysis:
+# To analyze the fit results a large number of functions are available in files:
+# - interface/EcalUtils.hh
+# - interface/RootUtils.hh
+# - interface/IJazZAxisViewer.hh
+
+# example macros are provided in:  etc/macros/
+# the most simple analysis is:
+root -l rootlogon.C
+IJazZAxisViewer<double> v(combineEtaScale("<myFileEB>.root.fittedResp"))
+TH1F * h = v.hist1D(dim,..)
+TGraphErrors *g = v.proj1D(dim,..)
+TH2F* h2 = v.proj2D(dim1,dim2,..)
+#...
+# where dim is the dimension on which one wants to project
+
+# 3.3 IJazZ output tree
+# IJazZ can also produced an output tree instead of doing a fit (option outputTree = 1)
+# the output tree format is defined in the class:
+ls src/IJazZ_tupleVar.cc
+
+# the default output tree format can be used to produce control plots and fits with the macro:
+ls etc/macros/BasicComparisonPlots.C
+
+root -b rootlogon.C
+.L etc/macros/BasicComparisonPlots.C+
+BasicComparisonPlots("<IJazZoutFile_Data>","<IJazZoutFile_MC>")
+
+### 4. IJazZ input:
+# IJazZ uses input file lists for data and MC, the examples are provided in the EcalElf framework 
+# in repertory:
+ls etc/data/
+# the input trees examples are stored on eos
+# an alternative input is to pass to the code a file list for data and another one for MC
+# (see example config files)
+#
+# 4.1 MC pu reweighting
+# the pu reweighting file from EcalElf are not used in IJazZ the reweighting is done vs the #Vtx
+# and directly computed on-the-fly
+
+# 4.2 Axis definition
+# IJazZ uses one axis to defined the resolution parameters and one to defined the response parameters
+# these 2 axis can be different
+# axis examples are given in:
+ls etc/axisDef/
+# the reading of these files is for now very poor and the format as to be well followed, especially the space are very important
+# the format is:
+axis[ <varName> <dim> ]: NBIN= <N>: x1 x2 ... xN   
+# note that NBIN is not the number of bins but the number of bin edges (so the actual number of bin is NBIN-1)
+# <varName> is the variable name, it can be defined and/or retrieved in: src/IJazZ_tupleVar.cc
+#           more particularly see the function: 
+void IJazZdiEle::fill_Xvar_forBinFinder( IJazZAxisND<double> *eCorr, std::vector<double> *x_eCorr );
+
+### 5. Data and MC energy corrections:
+# electron energy can be scaled (data only) or smeared (MC only) using files in the IJazZ 
+# output format (section 3.1, files named *.root.fittedResp or *.root.fittedReso)
+# This can be done prior to performing another fit or to make an output tree.
+
+# 5.1 Data Energy scale correction:
+# The electrons energy can be corrected. This is only available for data. The corrections files
+# must be in the IJazZ fit result format (*.root.fittedResp). Several corrections can be used. This is particularly
+# usefull when there the correction depends on the run range, then all the files can be added as 
+# correction and the run range is automatically checked by IJazZ.
+# The different corrections do not need to have the same axis definition, or to depend on the
+# variables. The corrections can only be added in the config file (no command line for now) with:
+ecalRespCorr = ../IJazZ/IJazZ_output/FitResults/<userDir1>/<runRange1>/IJazZ_EB_Data_<version1>.root.fittedResp
+ecalRespCorr = ../IJazZ/IJazZ_output/FitResults/<userDir2>/<runRange2>/IJazZ_EB_Data_<version2>.root.fittedResp
+ecalRespCorr = ../IJazZ/IJazZ_output/FitResults/<userDir3>/<runRange3>/IJazZ_EB_Data_<version3>.root.fittedResp
+#...
+# Note1: that only the "EB" file is supplied, the EEs files are automatically added if they exist.
+# Note2: only the format is important so it can also be the results for instance of the etaScale fit (section 7), like:
+# ecalRespCorr = ../IJazZ/IJazZ_output/FitResults/ecalEtaScale/<runRange>/IJazZ_EB_Data_<version>.root.fittedResp.etaScaleDataOverMC
+
+
+# 5.2 MC energy oversmearing:
+# The MC energies can also be oversmeared using resolution files in the IJazZ format (*root.fittedReso).
+# At least 2 files are required:
+#   - Data resolution
+#   - MC resolution
+# If several MC resolution files are provided, IJazZ assumes you are following an iterative
+# procedure to adjust the oversmearing, the oversmeared added to the MC is taken to be:
+# oversmearing[MC] = sqrt{ sum_i (sig[Data]^2 - sig^2[MC_i] ) }
+# where MC_i is the resolution computed at the ith step.
+# To supply the different measured resolutions one needs to add in the config file:
+resoData = ../IJazZ/IJazZ_output/FitResults/<userDir1>/<runRange1>/IJazZ_EB_Data_<version1>.root.fittedReso
+resoMC   = ../IJazZ/IJazZ_output/FitResults/<userDir2>/<runRange2>/IJazZ_EB_MC_<version1>.root.fittedReso
+resoMC   = ../IJazZ/IJazZ_output/FitResults/<userDir3>/<runRange3>/IJazZ_EB_MC_<version2>.root.fittedReso
+
+#An example of how to get the oversmearing in an iterative way is given in:
+etc/scripts/HggResolution.sh
+
+
+
+# 7. Obtaining the eta scale for ECAL calibration.
+
+
+
+
+

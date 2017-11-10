@@ -1,0 +1,2 @@
+axis[ AbsSCEta  0 ]: NBIN= 3 : 0. 1.5 2.5
+axis[ R9   	1 ]: NBIN= 3 : -10 0.94 10

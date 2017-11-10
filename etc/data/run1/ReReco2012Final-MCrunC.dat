@@ -1,0 +1,5 @@
+s       selected        /afs/cern.ch/work/f/fcouderc/public/ZNtuples-MCDep/MCRunC.root
+d       selected        root://eoscms//eos/cms/store/group/alca_ecalcalib/ecalelf/ntuples/8TeV/ALCARECO/DoubleElectron-ZAlcaSkim-RUN2012A-22Jan-v1/190456-193621/190456-208686_22Jan_v1_bis/DoubleElectron-ZAlcaSkim-RUN2012A-22Jan-v1-190456-193621.root
+d       selected        root://eoscms//eos/cms/store/group/alca_ecalcalib/ecalelf/ntuples/8TeV/ALCARECO/DoubleElectron-ZAlcaSkim-RUN2012B-22Jan-v1/193834-196531/190456-208686_22Jan_v1_bis/DoubleElectron-ZAlcaSkim-RUN2012B-22Jan-v1-193834-196531.root
+d       selected        root://eoscms//eos/cms/store/group/alca_ecalcalib/ecalelf/ntuples/8TeV/ALCARECO/DoubleElectron-ZAlcaSkim-RUN2012C-22Jan-v1/198022-203742/190456-208686_22Jan_v1_bis/DoubleElectron-ZAlcaSkim-RUN2012C-22Jan-v1-198022-203742.root
+d       selected        root://eoscms//eos/cms/store/group/alca_ecalcalib/ecalelf/ntuples/8TeV/ALCARECO/DoubleElectron-ZAlcaSkim-RUN2012D-22Jan-v1/203777-208686/190456-208686_22Jan_v1_bis/DoubleElectron-ZAlcaSkim-RUN2012D-22Jan-v1-203777-208686.root

@@ -1,0 +1,15 @@
+# list of files to run on
+# type	treeName	fileName
+# files are added to the same chain if they have the same treeName and the same type
+# chain with the same type are added as friends
+# only three type are admitted: s (signal), b (bkg), d (data)
+# all treeName are admitted, but some are mandatory:
+# selected
+# some are special: pileup, scaleEleHggRunEta, scaleEleHggRunEtaR9
+# RUN2015C-25ns
+#d1	selected  root://eoscms//eos/cms/store/group/dpg_ecal/alca_ecalcalib/ecalelf/ntuples/13TeV/ALCARERECO/phiSym_materialCorrection_ref/DoubleEG-ZSkim-Run2015C-Prompt-v1-25nsReco/253620-255031/246908-257599-Prompt_25ns/DoubleEG-ZSkim-Run2015C-Prompt-v1-25nsReco-253620-255031.root
+#RUN2015D-25ns
+d selected root://eoscms//eos/cms/store/group/dpg_ecal/alca_ecalcalib/ecalelf/ntuples/13TeV/ALCARERECO/phiSym_materialCorrection_ref/DoubleEG-ZSkim-Run2015D-Prompt-v3-25nsReco/256584-257611/246908-257599-Prompt_25ns-bis/unmerged-allRange.root
+#d	selected  root://eoscms//eos/cms/store/group/dpg_ecal/alca_ecalcalib/ecalelf/ntuples/13TeV/ALCARERECO/Run2015B_WF2_ICprompt2015/DoubleEG-ZSkim-Run2015C-Prompt-v1/253620-255031/247607-254914-Prompt-GoldenJSON-50ns/DoubleEG-ZSkim-Run2015C-Prompt-v1-253620-255031.root EMPTY
+s selected root://eoscms.cern.ch//eos/cms/store/group/dpg_ecal/alca_ecalcalib/ecalelf/ntuples/13TeV/ALCARECOSIM/DYJets_madgraph-RunIISpring15DR74-Asym25ns/allRange/DYJets_madgraph-RunIISpring15DR74-Asym25ns-allRange.root
+#s2  selected root://eoscms.cern.ch//eos/cms/store/group/dpg_ecal/alca_ecalcalib/ecalelf/ntuples/13TeV/ALCARECOSIM/DYJets_amctnlo-RunIISpring15DR74-Asym25ns/allRange/DYJets_amctnlo-RunIISpring15DR74-Asym25ns-allRange.root

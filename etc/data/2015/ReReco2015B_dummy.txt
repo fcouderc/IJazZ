@@ -1,0 +1,2 @@
+s       selected root://eoscms//eos/cms/store/group/dpg_ecal/alca_ecalcalib/ecalelf/ntuples/13TeV/ALCARECOSIM/DYJetsToLL_M-50_13TeV-Asympt50ns-pythia8_21Jul15_v5/allRange/v2/DYJetsToLL_M-50_13TeV-Asympt50ns-pythia8_21Jul15_v5-allRange.root
+d       selected root://eoscms//eos/cmsXXX

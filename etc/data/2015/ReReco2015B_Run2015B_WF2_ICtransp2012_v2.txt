@@ -1,0 +1,2 @@
+s       selected root://eoscms//eos/cms/store/group/dpg_ecal/alca_ecalcalib/ecalelf/ntuples/13TeV/ALCARECOSIM/DYJetsToLL_M-50_13TeV-Asympt50ns-pythia8_21Jul15_v5/allRange/v2/DYJetsToLL_M-50_13TeV-Asympt50ns-pythia8_21Jul15_v5-allRange.root
+d       selected root://eoscms//eos/cms/store/group/dpg_ecal/alca_ecalcalib/ecalelf/ntuples/13TeV/ALCARERECO/Run2015B_WF2_ICtransp2012_v2/DoubleEG-ZSkim-RUN2015B-ALCARAW-21Jul15-v1/251022-251883/251022-251562-Prompt-pfgEcal-noLaserProblem_date240715/DoubleEG-ZSkim-RUN2015B-ALCARAW-21Jul15-v1-251022-251883.root-
