@@ -306,7 +306,7 @@ void printEtaScaleToFile( string calibOutput, IJazZAxisND<double> &response, flo
 
 #define netaRING_EB 85
 #define netaRING_EE 35
-  string calibSkeleton = "etc/skeleton.txt";
+  string calibSkeleton = "etc/geom/skeleton.txt";
   ifstream skeleton(calibSkeleton.c_str());
   ofstream outputfile( calibOutput.c_str() );
   while ( skeleton.good() && !skeleton.eof() ) {
